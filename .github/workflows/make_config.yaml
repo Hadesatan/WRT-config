@@ -49,13 +49,18 @@ jobs:
             echo "No .config found, exiting"
             exit 1
           fi
-
+      - name: Create Git Tag
+        id: tag
+        run: |
+          TAG_NAME="config-$(date +%Y%m%d-%H%M%S)"
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+    
       # 创建 Release 并上传 .config 文件
       - name: Create Release and upload config
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: config-$(date +%Y%m%d-%H%M%S)
-          name: "OpenWrt Config $(date +%Y%m%d-%H%M%S)"
+          tag_name: ${{ steps.tag.outputs.tag_name }}
+          name: "OpenWrt Config ${{ steps.tag.outputs.tag_name }}"
           body: "通过 make menuconfig 生成的配置文件（未编译固件）"
           files: config_*.txt
           draft: false
