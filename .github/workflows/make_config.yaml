@@ -37,8 +37,6 @@ jobs:
       - name: SSH session for menuconfig
         uses: mxschmitt/action-tmate@v3
         timeout-minutes: 300
-        with:
-          limit-access-to-actor: true
 
       # 导出最终的 .config 文件
       - name: Collect config file
