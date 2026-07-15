@@ -46,6 +46,7 @@ jobs:
           if [ -f .config ]; then
             ./scripts/diffconfig.sh > config.seed
             cp config.seed ../config_$(date +%Y%m%d_%H%M%S).txt
+            cp config.seed ../config/config_$(date +%Y%m%d_%H%M%S).txt
           else
             echo "No .config found, exiting"
             exit 1
