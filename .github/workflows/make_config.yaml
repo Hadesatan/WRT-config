@@ -32,6 +32,10 @@ jobs:
           cd openwrt
           ./scripts/feeds update -a
           ./scripts/feeds install -a
+          cd ../config
+          LATEST_FILE=$(ls -v config_*.txt 2>/dev/null | tail -n 1)
+          echo "LATEST_CONFIG=$LATEST_FILE" >> $GITHUB_ENV
+          cp "$LATEST_CONFIG" ../openwrt/.config
 
       # SSH 连接，您将在此手动执行 make menuconfig
       - name: SSH session for menuconfig
@@ -47,6 +51,8 @@ jobs:
             ./scripts/diffconfig.sh > config.seed
             cp config.seed ../config_$(date +%Y%m%d_%H%M%S).txt
             cp config.seed ../config/config_$(date +%Y%m%d_%H%M%S).txt
+            FILENAME="config/config_$(date +%Y%m%d_%H%M%S).txt"
+            echo "FILE_PATH=$FILENAME" >> $GITHUB_ENV
           else
             echo "No .config found, exiting"
             exit 1
@@ -61,7 +67,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "自动化：复制并更新配置文件"
-          file_pattern: "config/" # 仅指定需要提交的文件
+          file_pattern: ${{ env.FILE_PATH }} # 仅指定需要提交的文件
           push_options: '--force' # 有冲突时可强制覆盖（慎用）
     
       # 创建 Release 并上传 .config 文件
