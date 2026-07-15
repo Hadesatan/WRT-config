@@ -55,7 +55,7 @@ jobs:
             cp config.seed ../config_$(date +%Y%m%d_%H%M%S).txt
             cp config.seed ../config/config_$(date +%Y%m%d_%H%M%S).txt
             LATEST_FILE="config/config_$(date +%Y%m%d_%H%M%S).txt"
-            echo "LATEST_FILE="config/config_$(date +%Y%m%d_%H%M%S).txt" >> $GITHUB_ENV
+            echo "LATEST_FILE="config/config_$(date +%Y%m%d_%H%M%S).txt"" >> $GITHUB_ENV
           else
             echo "No .config found, exiting"
             exit 1
