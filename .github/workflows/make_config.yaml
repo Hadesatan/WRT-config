@@ -61,7 +61,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "自动化：复制并更新配置文件"
-          file_pattern: "./config/config_$(date +%Y%m%d_%H%M%S).txt" # 仅指定需要提交的文件
+          file_pattern: "config/" # 仅指定需要提交的文件
           push_options: '--force' # 有冲突时可强制覆盖（慎用）
     
       # 创建 Release 并上传 .config 文件
