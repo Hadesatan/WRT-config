@@ -32,7 +32,7 @@ jobs:
           cd openwrt
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          cd ../config
+          cd $GITHUB_WORKSPACE/config
           LATEST_FILE=$(ls -v config_*.txt 2>/dev/null | tail -n 1)
           echo "LATEST_CONFIG=$LATEST_FILE" >> $GITHUB_ENV
           if [ -z "$LATEST_CONFIG" ]; then
