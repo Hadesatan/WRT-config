@@ -32,14 +32,14 @@ jobs:
           cd openwrt
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          cd $GITHUB_WORKSPACE/config
-          LATEST_FILE=$(ls -v config_*.txt 2>/dev/null | tail -n 1)
-          echo "LATEST_CONFIG=$LATEST_FILE" >> $GITHUB_ENV
-          if [ -z "$LATEST_CONFIG" ]; then
-            echo "错误：LATEST_CONFIG 环境变量为空"
-            exit 1
-          fi
-          cp "$LATEST_CONFIG" ../openwrt/.config
+#          cd $GITHUB_WORKSPACE/config
+#          LATEST_FILE=$(ls -v config_*.txt 2>/dev/null | tail -n 1)
+#          echo "LATEST_CONFIG=$LATEST_FILE" >> $GITHUB_ENV
+#          if [ -z "$LATEST_CONFIG" ]; then
+#            echo "错误：LATEST_CONFIG 环境变量为空"
+#            exit 1
+#          fi
+#          cp "$LATEST_CONFIG" ../openwrt/.config
 
       # SSH 连接，您将在此手动执行 make menuconfig
       - name: SSH session for menuconfig
