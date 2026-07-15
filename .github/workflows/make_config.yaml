@@ -44,7 +44,8 @@ jobs:
           cd openwrt
           # 如果 .config 存在，则复制到工作区
           if [ -f .config ]; then
-            cp .config ../config_$(date +%Y%m%d_%H%M%S).txt
+            ./scripts/diffconfig.sh > config.seed
+            cp config.seed ../config_$(date +%Y%m%d_%H%M%S).txt
           else
             echo "No .config found, exiting"
             exit 1
