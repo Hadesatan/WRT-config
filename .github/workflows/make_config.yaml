@@ -30,6 +30,7 @@ jobs:
         run: |
           git clone https://github.com/LiBwrt/Libwrt openwrt
           cd openwrt
+          sed -i '$a src-git kiddin9 https://github.com/kiddin9/op-packages.git;main' feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           cd ../config
